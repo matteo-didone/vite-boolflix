@@ -1,0 +1,26 @@
+@import './partials/mixins';
+@import './partials/variables';
+
+// Resetting of the browser default styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.flex {
+    display: flex;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
