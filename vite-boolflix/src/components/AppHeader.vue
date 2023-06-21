@@ -1,19 +1,25 @@
 <template>
-    <header> 
-        
+    <header>
+        <NavBar />
     </header>
 </template>
 
 <script>
 import { store } from '../store.js'
+import NavBar from './NavBar.vue'
 
 export default {
     name: 'AppHeader',
+
+    components: {
+        NavBar
+    },
+
     data() {
 
         return {
             store,
-        }
+        };
     },
 
     methods: {
@@ -23,6 +29,4 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
-
-</style>    
+<style lang="scss" scoped></style>    

@@ -1,5 +1,5 @@
 <template>
-    
+
 </template>
 
 <script>
@@ -8,6 +8,11 @@ import { store } from '../store.js'
 
 export default {
     name: 'AppMain',
+
+    components: {
+        
+    },
+    
     data() {
         return {
             store,
