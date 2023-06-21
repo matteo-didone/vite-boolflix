@@ -49,6 +49,7 @@ export default {
             // Adding searchQuery and movies to the data object
             searchQuery: '',
             movies: [],
+            countryCode: '', 
         }
     },
 
