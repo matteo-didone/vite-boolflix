@@ -21,7 +21,7 @@
                 <!-- Copied .title, .orginal_title, .original_language, .vote_average from the API code, visualized using Postman -->
                 <h3>{{ movie.title }}</h3>
                 <p>Original Title: {{ movie.original_title }}</p>
-                <p>Language: {{ movie.original_language }}</p>
+                <p>Language: {{ movie.original_language }} <span :class="countryCode" id="flag"></span> </p>
                 <p>Rating: {{ movie.vote_average }}</p>
             </li>
         </ul>
@@ -49,7 +49,7 @@ export default {
             // Adding searchQuery and movies to the data object
             searchQuery: '',
             movies: [],
-            countryCode: '', 
+            countryCode: 'flag-icon flag-icon-', 
         }
     },
 
@@ -70,6 +70,15 @@ export default {
                 .then(data => {
                     // We update the movie array with the results properties of the data object
                     this.movies = data.results;
+                })
+                .catch(err => console.error(err));
+        },
+
+        getCountryCode() {
+            fetch('')
+                .then(response => response.json())
+                .then(data => {
+                    this.countryCode += toLoweCase(data.country_code);
                 })
                 .catch(err => console.error(err));
         }
