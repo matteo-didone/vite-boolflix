@@ -6,7 +6,8 @@
                 @click calls the method searchMovies when the button is clicked
             -->
             <input v-model="searchQuery" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button @click="searchMovies" class="btn btn-outline-success" type="button">Search</button>
+            <!-- A button can only trigger one method when clicked in Vue -->
+            <button @click="searchMoviesAndTvSeries" class="btn btn-outline-success" type="button">Search</button>
         </div>
     </nav>
 
@@ -36,10 +37,10 @@
                 v-for iterates over the movies array and displays the movie information
                 :key is used to give each movie a unique identifier
             -->
-            <li v-for="serie in series" :key="serie.id">
-                <!-- Copied .title, .orginal_title, .original_language, .vote_average from the API code, visualized using Postman -->
-                <h3>{{ serie.title }}</h3>
-                <p>Original Title: {{ serie.original_title }}</p>
+            <li v-for="serie in tvSeries" :key="serie.id">
+                <!-- Copied .name, .orginal_title, .original_language, .vote_average from the API code, visualized using Postman -->
+                <h3>{{ serie.name }}</h3>
+                <p>Original Title: {{ serie.original_name }}</p>
                 <p>Language: {{ serie.original_language }}
                     <img class="flag" :src="getFlag(serie.original_language)" />
                 </p>
@@ -58,7 +59,7 @@ export default {
     name: 'SearchBar',
 
     components: {
-        
+
     },
 
     created() {
@@ -73,7 +74,13 @@ export default {
             // Adding searchQuery and movies to the data object
             searchQuery: '',
 
+            // Adding movies array to the data object
             movies: [],
+
+            // Adding series array to the data object
+            tvSeries: []
+
+
         }
     },
 
@@ -139,6 +146,33 @@ export default {
             }
 
             return ""; // Return empty string if country code is not found
+        },
+
+        // Declaring searchMovies method, inside which there's the API call
+        searchTvSerie() {
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZjYwMDQ3Y2RlYWZmNWM0NmYxZTc3MDdlMDc3YWY0MCIsInN1YiI6IjY0OTJjM2IxNjVlMGEyMDEyNWY5ZjgyZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zuGfWxv_Hgil7FBEhmMq0e7sRe2NH5D0lXZnDpLTOV8'
+                }
+            };
+
+            fetch(`https://api.themoviedb.org/3/search/tv?include_adult=false&language=en-US&page=1&query=${this.searchQuery}`, options)
+                .then(response => response.json())
+                .then(data => {
+                    // We update the tvSeries array with the results properties of the data object
+                    this.tvSeries = data.results;
+                })
+                .catch(err => console.error(err));
+        },
+
+        // Declaring searchMoviesAndTvSeries method, inside which there's the searchMovies and searchTvSerie methods
+        // Why? Because a user can search for movies and tv series at the same time by clicking the search button
+        // A search button in Vue can only trigger one method when clicked, so we need to create a method that calls the other two
+        searchMoviesAndTvSeries() {
+            this.searchMovies();
+            this.searchTvSerie();
         }
 
     }
