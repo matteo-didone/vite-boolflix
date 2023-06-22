@@ -21,15 +21,17 @@
                 <!-- Copied .title, .orginal_title, .original_language, .vote_average from the API code, visualized using Postman -->
                 <h3>{{ movie.title }}</h3>
                 <p>Original Title: {{ movie.original_title }}</p>
-                <p>Language: {{ movie.original_language }} <span :class="countryCode" id="flag"></span> </p>
+                <p>Language: {{ movie.original_language }} </p>
                 <p>Rating: {{ movie.vote_average }}</p>
             </li>
         </ul>
     </div>
 </template>
 
+
 <script>
 import { store } from '../store.js'
+
 
 export default {
     name: 'SearchBar',
@@ -49,7 +51,7 @@ export default {
             // Adding searchQuery and movies to the data object
             searchQuery: '',
             movies: [],
-            countryCode: 'flag-icon flag-icon-', 
+            countryCode: 'flag-icon flag-icon-',
         }
     },
 
@@ -73,18 +75,10 @@ export default {
                 })
                 .catch(err => console.error(err));
         },
-
-        getCountryCode() {
-            fetch('')
-                .then(response => response.json())
-                .then(data => {
-                    this.countryCode += toLoweCase(data.country_code);
-                })
-                .catch(err => console.error(err));
-        }
     }
 }
 </script>
 
 
-<style lang="scss" scoped></style>    
+<style lang="scss" scoped>
+</style>    
