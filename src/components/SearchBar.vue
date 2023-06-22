@@ -26,6 +26,7 @@
                     <img class="flag" :src="getFlag(movie.original_language)" />
                 </p>
                 <p>Rating: {{ movie.vote_average }}</p>
+                <p> <img class="movieCover" :src="getMovieCover(movie)" /> </p>
             </li>
         </ul>
     </div>
@@ -45,6 +46,7 @@
                     <img class="flag" :src="getFlag(serie.original_language)" />
                 </p>
                 <p>Rating: {{ serie.vote_average }}</p>
+                <p> <img class="tvSerieCover" :src="getTvSerieCover(serie)" /> </p>
             </li>
         </ul>
     </div>
@@ -60,10 +62,6 @@ export default {
 
     components: {
 
-    },
-
-    created() {
-        this.searchMovies();
     },
 
     data() {
@@ -173,7 +171,35 @@ export default {
         searchMoviesAndTvSeries() {
             this.searchMovies();
             this.searchTvSerie();
-        }
+        },
+
+        getMovieCover(movie) {
+            if (movie.poster_path) {
+                return `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
+            }
+
+            else if (movie.backdrop_path) {
+                return `https://image.tmdb.org/t/p/w342${movie.backdrop_path}`;
+            }
+
+            else {
+                return `https://ih1.redbubble.net/image.1030805420.6483/flat,750x,075,f-pad,750x1000,f8f8f8.jpg`
+            }
+        },
+
+        getTvSerieCover(tvSerie) {
+            if (tvSerie.poster_path) {
+                return `https://image.tmdb.org/t/p/w342${tvSerie.poster_path}`;
+            }
+
+            else if (tvSerie.backdrop_path) {
+                return `https://image.tmdb.org/t/p/w342${tvSerie.backdrop_path}`;
+            }
+
+            else {
+                return `https://ih1.redbubble.net/image.1030805420.6483/flat,750x,075,f-pad,750x1000,f8f8f8.jpg`
+            }
+        },
 
     }
 }
