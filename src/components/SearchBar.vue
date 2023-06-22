@@ -22,8 +22,7 @@
                 <h3>{{ movie.title }}</h3>
                 <p>Original Title: {{ movie.original_title }}</p>
                 <p>Language: {{ movie.original_language }}
-                    <Icon :icon="getFlagIcon(movie.original_language)" style="font-size: 24px;" />
-                    <Icon icon="flag-icon flag-icon-gb"/>
+                    <img class="flag" :src="getFlag(movie.original_language)" />
                 </p>
                 <p>Rating: {{ movie.vote_average }}</p>
             </li>
@@ -51,7 +50,7 @@ export default {
 
         return {
             store,
-
+            
             // Adding icons
             icons: {
                 'en': 'flag-icon flag-icon-gb',
@@ -350,9 +349,48 @@ export default {
                 .catch(err => console.error(err));
         },
 
-        getFlagIcon(language) {
-            return this.icons[language.toLowerCase()] || '';
-        },
+        getFlag(country) {
+
+            this.country = country.toLowerCase();
+
+            if (country === "en") {
+                return "https://flagsapi.com/GB/flat/64.png";
+            } else if (country === "es") {
+                return "https://flagsapi.com/ES/flat/64.png";
+            } else if (country === "fr") {
+                return "https://flagsapi.com/FR/flat/64.png";
+            } else if (country === "it") {
+                return "https://flagsapi.com/IT/flat/64.png";
+            } else if (country === "ja") {
+                return "https://flagsapi.com/JP/flat/64.png";
+            } else if (country === "ko") {
+                return "https://flagsapi.com/KR/flat/64.png";
+            } else if (country === "pt") {
+                return "https://flagsapi.com/PT/flat/64.png";
+            } else if (country === "ru") {
+                return "https://flagsapi.com/RU/flat/64.png";
+            } else if (country === "zh") {
+                return "https://flagsapi.com/CN/flat/64.png";
+            } else if (country === "de") {
+                return "https://flagsapi.com/DE/flat/64.png";
+            } else if (country === "nl") {
+                return "https://flagsapi.com/NL/flat/64.png";
+            } else if (country === "sv") {
+                return "https://flagsapi.com/SE/flat/64.png";
+            } else if (country === "no") {
+                return "https://flagsapi.com/NO/flat/64.png";
+            } else if (country === "fi") {
+                return "https://flagsapi.com/FI/flat/64.png";
+            } else if (country === "da") {
+                return "https://flagsapi.com/DK/flat/64.png";
+            } else if (country === "hi") {
+                return "https://flagsapi.com/IN/flat/64.png";
+            } else if (country === "ar") {
+                return "https://flagsapi.com/SA/flat/64.png";
+            }
+
+            return ""; // Return empty string if country code is not found
+        }
 
     }
 }
@@ -360,4 +398,7 @@ export default {
 
 
 <style lang="scss" scoped>
+.flag {
+    height: 100%;
+}
 </style>    
