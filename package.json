@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iconify/icons-flag": "^1.2.29",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "country-flag-icons": "^1.5.7",
@@ -17,6 +18,7 @@
     "vue": "^3.2.47"
   },
   "devDependencies": {
+    "@iconify-icons/flag": "^1.2.29",
     "@iconify/vue": "^4.1.1",
     "@vitejs/plugin-vue": "^4.1.0",
     "sass": "^1.63.5",
