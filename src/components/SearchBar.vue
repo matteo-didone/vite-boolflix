@@ -21,7 +21,7 @@
                 <!-- Copied .title, .orginal_title, .original_language, .vote_average from the API code, visualized using Postman -->
                 <h3>{{ movie.title }}</h3>
                 <p>Original Title: {{ movie.original_title }}</p>
-                <p>Language: {{ movie.original_language }} </p>
+                <p>Language: {{ movie.original_language }} <Icon icon="flag:ac-4x3" /> </p>
                 <p>Rating: {{ movie.vote_average }}</p>
             </li>
         </ul>
@@ -31,13 +31,14 @@
 
 <script>
 import { store } from '../store.js'
-
+import { Icon } from '@iconify/vue';    
 
 export default {
     name: 'SearchBar',
 
     components: {
-
+        store,
+        Icon,
     },
 
     created() {
