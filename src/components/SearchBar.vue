@@ -29,8 +29,9 @@
                 <p>Rating Halfed and Rounded: {{ convertMovieRating(movie.vote_average) }}</p>
                 <div class="star-rating-wrapper">
                     <span v-for="starsFilled in totalStars" :key="starsFilled">
-                        <i v-if="starsFilled <= convertMovieRating(movie.vote_average)" class="fas fa-star filled"></i>
-                        <i v-else class="fas fa-star"></i>
+                        <font-awesome-icon v-if="starsFilled <= convertMovieRating(movie.vote_average)"
+                            :icon="['fas', 'star']" class="filled" />
+                        <font-awesome-icon v-else :icon="['fas', 'star']" />
                     </span>
                 </div>
                 <p> <img class="movieCover" :src="getMovieCover(movie)" /> </p>
@@ -56,8 +57,9 @@
                 <p>Rating Halfed and Rounded: {{ convertTvSerieRating(serie.vote_average) }}</p>
                 <div class="star-rating-wrapper">
                     <span v-for="starsFilled in totalStars" :key="starsFilled">
-                        <i v-if="starsFilled <= convertTvSerieRating(serie.vote_average)" class="fas fa-star filled"></i>
-                        <i v-else class="fas fa-star"></i>
+                        <font-awesome-icon v-if="starsFilled <= convertTvSerieRating(serie.vote_average)"
+                            :icon="['fas', 'star']" class="filled" />
+                        <font-awesome-icon v-else :icon="['fas', 'star']" />
                     </span>
                 </div>
                 <p> <img class="tvSerieCover" :src="getTvSerieCover(serie)" /> </p>
