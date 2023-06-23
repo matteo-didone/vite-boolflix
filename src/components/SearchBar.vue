@@ -26,6 +26,13 @@
                     <img class="flag" :src="getFlag(movie.original_language)" />
                 </p>
                 <p>Rating: {{ movie.vote_average }}</p>
+                <p>Rating Halfed and Rounded: {{ convertMovieRating(movie.vote_average) }}</p>
+                <div class="star-rating-wrapper">
+                    <span v-for="starsFilled in totalStars" :key="starsFilled">
+                        <i v-if="starsFilled <= convertMovieRating(movie.vote_average)" class="fas fa-star filled"></i>
+                        <i v-else class="fas fa-star"></i>
+                    </span>
+                </div>
                 <p> <img class="movieCover" :src="getMovieCover(movie)" /> </p>
             </li>
         </ul>
@@ -46,11 +53,17 @@
                     <img class="flag" :src="getFlag(serie.original_language)" />
                 </p>
                 <p>Rating: {{ serie.vote_average }}</p>
+                <p>Rating Halfed and Rounded: {{ convertTvSerieRating(serie.vote_average) }}</p>
+                <div class="star-rating-wrapper">
+                    <span v-for="starsFilled in totalStars" :key="starsFilled">
+                        <i v-if="starsFilled <= convertTvSerieRating(serie.vote_average)" class="fas fa-star filled"></i>
+                        <i v-else class="fas fa-star"></i>
+                    </span>
+                </div>
                 <p> <img class="tvSerieCover" :src="getTvSerieCover(serie)" /> </p>
             </li>
         </ul>
     </div>
-
 </template>
 
 
@@ -76,9 +89,9 @@ export default {
             movies: [],
 
             // Adding series array to the data object
-            tvSeries: []
+            tvSeries: [],
 
-
+            totalStars: 5,
         }
     },
 
@@ -201,6 +214,19 @@ export default {
             }
         },
 
+        // We then convert the decimal rating from 1 to 10 into a whole number from 1 to 5, allowing us to display a number of filled stars on the screen ranging from 1 to 5, leaving the rest empty (we can find the icons in FontAwesome). We always round up to the next whole number and do not handle half-filled icons (or half-empty ones :P).
+        convertMovieRating(voteAverage) {
+            const halfRating = Math.ceil(voteAverage / 2);
+
+            return halfRating;
+        },
+
+        convertTvSerieRating(voteAverage) {
+            const halfRating = Math.ceil(voteAverage / 2);
+            return halfRating;
+        },
+
+
     }
 }
 </script>
@@ -209,5 +235,18 @@ export default {
 <style lang="scss" scoped>
 .flag {
     height: 100%;
+}
+
+.star-rating-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.fa-star.filled {
+    color: gold;
+}
+
+.fas.fa-star {
+    color: lightgray;
 }
 </style>    
