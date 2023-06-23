@@ -1,18 +1,18 @@
 <template>
     <header>
-        <NavBar />
+        <SearchBar />
     </header>
 </template>
 
 <script>
 import { store } from '../store.js'
-import NavBar from './NavBar.vue'
+import SearchBar from './SearchBar.vue';
 
 export default {
     name: 'AppHeader',
 
     components: {
-        NavBar
+        SearchBar
     },
 
     data() {
